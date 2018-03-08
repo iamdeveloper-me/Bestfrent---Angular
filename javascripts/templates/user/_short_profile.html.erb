@@ -1,0 +1,56 @@
+<div class="tab-pane col-sm-12" id="shortprofile">
+  <div class="col-sm-7 border-profile">
+    <div class="short-desc">
+      <div class="box-sd"><a href="javascript:void(0);">
+        <p>{{user.short_description ? user.short_description : ('PROFILE_PAGE.SHORT_PROFILE.SD_INTRO' | translate)}}<i class="fa fa-pencil-square-o" data-toggle="tooltip" data-placement="top" data-original-title="Edit"></i></p>
+        </a>
+        <div class="edit-field">
+          <form>
+            <div class="row">
+              <div class="col-lg-12">
+                <input type="text" ng-model="user.short_description" ng-blur="updateProfile({short_description: user.short_description})" ng-enter="updateProfile({short_description: user.short_description})" id="place_name" class="form-control clearfix" placeholder="Max 50 characters" maxlength="50">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="sd-block">
+      <div class="col-sm-12 sd-icons profile-section">
+        <div class="col-sm-6">
+          <div class="box-sd row" ng-class="{'pro-filled' : user.residence}">
+          	<div class="col-xs-3"><i class="icon-short-profile fa fa-home"></i></div>
+            <div class="col-xs-9" ng-class="{'pro-details' : user.residence}" id="place">{{user.residence ? (user.residence | titleCase) : 'PROFILE_PAGE.SHORT_PROFILE.RESIDENCE' | translate}}</div> 
+          </div>
+          <div class="box-sd row" ng-class="{'pro-filled' : user.education}">
+          	<div class="col-xs-3"><div class="icon-short-profile edu-pro"></div></div>
+            <div class="col-xs-9 pro-details">{{user.education ? ('PROFILE_PAGE.ABOUT_ME.EDUCATION.' + education_options[user.education] | translate) : ('PROFILE_PAGE.SHORT_PROFILE.EDUCATION' | translate)}}</div>
+          </div>
+          <div class="box-sd row pro-filled" ng-if="user.living_habbits.smoker">
+          	<div class="col-xs-3"><div class="icon-short-profile smoker-pro"></div></div>
+            <div class="smo-title pro-details col-xs-9"> {{'PROFILE_PAGE.SHORT_PROFILE.SMOKER' | translate}}</div> 
+          </div>
+          <div class="box-sd row" ng-class="{'pro-filled' : user.no_of_children}">
+          	<div class="col-xs-3"><i class="icon-short-profile fa fa-users"></i></div>
+            <div class="col-xs-9 pro-details">{{user.no_of_children ? user.no_of_children : ('PROFILE_PAGE.SHORT_PROFILE.FAMILY' | translate)}}</div> 
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="box-sd row" ng-class="{'pro-filled' : user_interests}">
+          	<div class="col-xs-3"><i class="icon-short-profile fa fa-thumbs-o-up"></i></div>
+            <div class="pro-details col-xs-9">{{user_interests ? user_interests : ('PROFILE_PAGE.SHORT_PROFILE.INTEREST' | translate)}}</div> 
+          </div>
+          <div class="box-sd row" ng-class="{'pro-filled' : user.status}">
+          	<div class="col-xs-3"><i class="icon-short-profile fa fa-heart"></i></div>
+            <div class="pro-details col-xs-9">{{user.status ? ('PROFILE_PAGE.ABOUT_ME.STATUS.' + relationship_options[user.status] | translate) : ('PROFILE_PAGE.SHORT_PROFILE.RELATIONSHIP' | translate)}}</div> 
+          </div>
+          <div class="box-sd row pro-filled" ng-if="user.living_habbits.pets">
+          	<div class="col-xs-3"><div class="icon-short-profile pet-pro"></div></div>
+            <div class="col-xs-9 pro-details">{{'PROFILE_PAGE.SHORT_PROFILE.PETS' | translate}}</div> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div ng-include="" src="'user/_profile_completion.html'"></div>
+</div>

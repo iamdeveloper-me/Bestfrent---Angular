@@ -1,0 +1,67 @@
+<div id="signinModal" class="modal fade col-md-5 hidden-sm hidden-xs" style="outline:none;overflow: hidden" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" style="width:465px;">
+    <div class="modal-content" style="width:455px;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Sign In</h4>
+      </div>
+      <form class="col-md-12" id="signin_form" ng-submit="signInNormal(user)" url="/">
+        <div class="modal-body">
+          <div class="row">
+            <a class="col-md-11 col-md-offset-1" href="#" ng-disabled="$scope.facebookReady" ng-click="initFacebookLogin()">
+              <div class="facebook-sign-up col-md-9 col-md-offset-1">
+                <i class="fa fa-facebook"></i>
+                <span>Facebook Sign In</span>
+              </div>
+            </a>
+            <hr class="col-md-9 col-md-offset-1" />
+          </div>
+            <div class="row">
+                <a class="col-md-11 col-md-offset-1" href="#" ng-disabled="$scope.facebookReady" ng-click="authNetwork('xing')">
+                    <div class="xing-sign-up col-md-9 col-md-offset-1">
+                        <i class="fa fa-xing"></i>
+                        <span>XING Sign In</span>
+                    </div>
+                </a>
+                <hr class="col-md-9 col-md-offset-1" />
+            </div>
+          <div class="row">
+            <div class="error" ng-if="error" style="box-shadow:none;text-align: center;margin-bottom:10px;color: red;">
+              {{error}}
+            </div>
+            <div class="row">
+              <label class="col-md-2 col-md-offset-1">Email</label>
+              <input type="email" class="col-md-7" ng-model="user.email" />
+            </div>
+            <div class="row" style="margin-top: 10px;">
+              <label class="col-md-2 col-md-offset-1">Password</label>
+              <input type="password" class="col-md-7" ng-model="user.password" />
+            </div>
+          </div>
+          <div class="row text-center" ng-if="!userLoggedIn">
+           	<br>
+            <p>  Don't have account? <a href="/sign_up" id="closeMe" ng-click="closeSignInModal()">Sign up here</a></p>
+          </div>
+          <div id="close_sign_in_model" data-dismiss="modal" style="display:none;">&nbsp;</div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal" type="button" style="border-radius: 0">Cancel</button>
+          <button class="btn btn-primary" type="submit" style="border-radius:0;background:#DDA643;border-color:#A37624">SignIn</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  $("#signinModal").on("hidden.bs.modal", function(ev, response){
+    $(this).parent().hide()
+  });
+
+
+$(document).on("click", "#closeMe", function(){
+          location.reload(true);
+});
+
+
+</script>

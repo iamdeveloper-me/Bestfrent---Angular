@@ -1,0 +1,61 @@
+<span>{{message.user.first_name}}</span>
+<span class="pull-right">{{message.created_at  | date:'MM/dd/yyyy'}}</span>
+<p ng-if="message.message_type.hasOwnProperty('uploaded') && message.message_type.is_uploaded">
+  {{'MESSAGE.TENANT_DOC_UPLOADED_MESSAGE' | translate }} <a href='/api/documents/download_doc?tenant={{message.user_id}}&type={{message.message_type.uploaded}}&property={{message.message_type.property_id}}' target='_blank'> "{{'MESSAGE.'+message.message_type.uploaded | translate}}"</a>. {{'MESSAGE.TENANT_DOC_UPLOAD_MESSAGE_SUFIX' | translate }}
+</p>
+<p ng-if="message.message_type.hasOwnProperty('uploaded') && !message.message_type.is_uploaded">
+  {{'MESSAGE.TENANT_DOC_UPDATED_MESSAGE' | translate }} <a href='/api/documents/download_doc?tenant={{message.user_id}}&type={{message.message_type.uploaded}}&property={{message.message_type.property_id}}' target='_blank'>  "{{ 'MESSAGE.'+message.message_type.uploaded | translate }}"</a>. {{'MESSAGE.TENANT_DOC_UPLOAD_MESSAGE_SUFIX' | translate }}
+</p>
+<p ng-if="message.message_type.hasOwnProperty('change_requirement')">
+  {{'MESSAGE.'+message.message_type.change_requirement | translate }}
+</p>
+
+<p ng-if="message.message_type.hasOwnProperty('missing_doc')">
+  {{'MESSAGE.LANDLORD_REQUEST_FOR_MISSING_DOC_MESSAGE' | translate }} "{{'MESSAGE.DOC_REQUIRE.'+message.message_type.missing_doc  | translate }}". {{'MESSAGE.LANDLORD_MESSAGE_SUFIX' | translate }} {{trustedHtml(message.body)}}
+</p>
+
+<p ng-if="message.message_type.hasOwnProperty('tenant_confirm')">
+  {{'MESSAGE.TENANT_CONFIRM_MSG' | translate }} {{selectedProperty.title+' '+selectedProperty.address.street}}.{{trustedHtml(message.body)}}
+</p>
+
+<p ng-bind-html="trustedHtml(message.body)" ng-if="(!message.message_type.hasOwnProperty('missing_doc') && !message.message_type.hasOwnProperty('tenant_confirm') && !message.message_type.hasOwnProperty('message_type') )"></p>
+
+<div ng-if="(message.message_type.hasOwnProperty('message_type'))">
+
+  <p ng-if="(message.message_type.message_type == 'contract_update' )">{{'MESSAGE.CONTRACT.UPDATE' | translate }} "<a href='/api/contracts/download?property_id={{message.message_type.property_id}}' target='_blank'>{{'MESSAGE.CONTRACT.LINK_TXT' | translate }}</a>".</p>
+
+  <p ng-if="(message.message_type.message_type == 'contract_upload' )">{{'MESSAGE.CONTRACT.UPLOAD' | translate }} "<a href='/api/contracts/download?property_id={{message.message_type.property_id}}' target='_blank'>{{'MESSAGE.CONTRACT.LINK_TXT' | translate }}</a>".</p>
+
+  <p ng-if="(message.message_type.message_type == 'contract_delete' )">{{'MESSAGE.CONTRACT.DELETE' | translate }}</p>
+
+  <p ng-if="(message.message_type.message_type == 'update_sign_contract' )">{{'MESSAGE.SIGN_CONTRACT.UPDATE' | translate }} "<a href='/api/contracts/download?property_id={{message.message_type.property_id}}&type=signed' target='_blank'>{{'MESSAGE.SIGN_CONTRACT.LINK_TXT' | translate }}</a>".</p>
+
+  <p ng-if="(message.message_type.message_type == 'upload_sign_contract' )">{{'MESSAGE.SIGN_CONTRACT.UPLOAD' | translate }} "<a href='/api/contracts/download?property_id={{message.message_type.property_id}}&type=signed' target='_blank'>{{'MESSAGE.CONTRACT.LINK_TXT' | translate }}</a>".</p>
+
+  <p ng-if="(message.message_type.message_type == 'delete_sign_contract' )">{{'MESSAGE.SIGN_CONTRACT.DELETE' | translate }}</p>
+
+  <p ng-if="(message.message_type.message_type == 'payment' )">
+    {{'MESSAGE.PAYMENT.PAYRENT' | translate }} {{trustedHtml(message.body)}}
+  </p>
+
+  <p ng-if="(message.message_type.message_type == 'edit_payment' )">
+    {{'MESSAGE.PAYMENT.EDIT_PAYRENT' | translate }} {{trustedHtml(message.body)}}
+  </p>
+
+  <p ng-if="(message.message_type.message_type == 'stop_payment' )">
+    {{'MESSAGE.PAYMENT.STOP_PAYRENT' | translate }} {{trustedHtml(message.body)}}
+  </p>
+
+  <p ng-if="(message.message_type.message_type == 'accept_payment' )">
+    {{'MESSAGE.PAYMENT.ACCEPT' | translate }} {{trustedHtml(message.body)}}
+  </p>
+
+  <p ng-if="(message.message_type.message_type == 'decline_payment' )">
+    {{'MESSAGE.PAYMENT.DECLINE' | translate }} {{trustedHtml(message.body)}}
+  </p>
+
+  <p ng-if="(['MESSAGE.APPOINTMENT.ACCEPT','MESSAGE.APPOINTMENT.DECLINED', 'MESSAGE.APPOINTMENT.CANCEL', 'MESSAGE.APPOINTMENT.NEW_APT', 'MESSAGE.APPOINTMENT.RECONFIRM', 'MESSAGE.APPOINTMENT.UPDATE_PENDING'].indexOf(message.message_type.message_type) != -1 )">
+    {{message.message_type.message_type | translate:'{msg_body: message.body}'}}
+  </p>
+
+</div>

@@ -1,0 +1,41 @@
+<div ng-include="" src="'shared/_header.html'" ng-controller="HeaderController"></div>
+<div class="block-full">
+  <div class="profile">
+    <div class="image"> <img src=<%= image_path('cover-new.jpg') %> class="img-responsive">
+      <div class="pro_header">
+        <h2>{{user.job? user.job : '' | titleCase}}</h2>
+        <h4>{{dobInYears()}}</h4>
+      </div>
+    </div>
+
+    <div class="user clearfix">
+      <div class="avatar">
+        <img class="img-thumbnail img-responsive" src="{{user.avatar.url ? user.avatar.url : 'assets/no_image.jpg' }}" style="width: 200px; height: 220px;">
+        <a class="edit-icon" href="#" ng-click="changeProfileImg()">
+          <i class="fa fa-edit"></i>
+        </a>
+        <input id="profile_image" name="user[avatar]" type="file" ng-file-select="onFileSelect($files)" style="display:none">
+      </div>
+    </div>
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs profile-tab" role="tablist">
+      <li ng-class="{'active' : (profileActiveTab == 'short_profile')}"><a href="#" role="tab" data-toggle="tab" ng-click= "changeProfileActiveTab('short_profile')">{{'PROFILE_PAGE.TABS.SHORT_PROFILE' | translate}}</a></li>
+      <li ng-class="{'active' : (profileActiveTab == 'about_me')}" ><a href="#" role="tab" data-toggle="tab" ng-click= "changeProfileActiveTab('about_me')">{{'PROFILE_PAGE.TABS.ABOUT_ME' | translate}}</a></li>
+      <li ng-class="{'active' : (profileActiveTab == 'leisure_int')}" ><a href="#" role="tab" data-toggle="tab" ng-click= "changeProfileActiveTab('leisure_int')">{{'PROFILE_PAGE.TABS.L_INTEREST' | translate}}</a></li>
+      <li ng-class="{'active' : (profileActiveTab == 'living_habbits')}" ><a href="#" role="tab" data-toggle="tab" ng-click= "changeProfileActiveTab('living_habbits')">{{'PROFILE_PAGE.TABS.LIVING_HABBITS' | translate}}</a></li>
+      <li ng-class="{'active' : (profileActiveTab == 'documents')}" ><a href="#" role="tab" data-toggle="tab" ng-click= "changeProfileActiveTab('documents')">{{'PROFILE_PAGE.TABS.DOCUMENT' | translate}}</a></li>
+    </ul>
+    
+    <!-- Tab panes -->
+    <div class="tab-content row">
+      <div ng-include="" src="'user/_short_profile.html'" ng-if="(profileActiveTab == 'short_profile')"></div>
+      <div ng-include="" src="'user/_about_me.html'" ng-if="(profileActiveTab == 'about_me')"></div>
+      <div ng-include="" src="'user/_leisure_interest.html'" ng-if="(profileActiveTab == 'leisure_int')"></div>
+      <div ng-include="" src="'user/_living_habbits.html'" ng-if="(profileActiveTab == 'living_habbits')"></div>
+      <div ng-include="" onload="addjQueryToPartial()" src="'user/_documents.html'" ng-if="(profileActiveTab == 'documents')"></div>
+    </div>
+  </div>
+</div>
+
+<div ng-include="" src="'user/_alert_popup.html'"></div>

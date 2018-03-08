@@ -1,0 +1,104 @@
+<div class="header navbar navbar-inverse navbar-fixed-top" role="navigation" ng-init="language()">
+  <div class="container" style="padding:0;">
+    <div class="navbar-header">
+      <button class="navbar-toggle" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button" style="background: white;outline:none;">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="restaurant-brand row">
+        <a href="/" class="navbar-brand home_image" style="padding:5px 0;">
+          <%= image_tag('logo.png', width: 150) %>
+        <!-- <img style="width: 150px;" src="/assets/logo.png"> !-->
+        </a>
+      </div>
+    </div>
+    <div class="col-md-8 pull-right">
+    <div ng-if="userLoggedIn" class="common-button yellow-button  pull-right menu-item" style="padding:4px 6px;" >
+      <a href="/my_profile">
+        <div class="pull-left profile-pic" style="padding-left: 5px;padding-right: 7px;">
+          <img src="{{currentUser.avatar.url}}" style="width:20px;height:20px;" />
+        </div>
+        <div class="pull-left">
+          <span class="col-md-11 col-sm-12 col-xs-12" style="padding:1px 0 0;color:#fff"> {{currentUser.first_name}}</span>
+          <!--<span class="col-md-12 col-sm-12 col-xs-12" style="padding:0;font-size: 11px;color: #fff;text-transform: capitalize;clear:both;"> Signed In</span> -->
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3 pull-right common-button blue-button" ng-if="!user_register && userLoggedIn ">
+      <a href="/register_confirm"  class="menu-item col-md-12 col-sm-3 hidden-xs" style="padding:0px;color:#fff;text-decoration:none">
+        {{'HEADER.ADD_OFFERING' | translate}}
+      </a>
+    </div>
+    <div class="common-button blue-button pull-right" ng-if="user_register && userLoggedIn">
+      <a href="/properties/new"  class="menu-item col-md-12 col-sm-4 hidden-xs" style="padding:0px;color:#fff;text-decoration:none">
+        {{'HEADER.ADD_OFFERING' | translate}}
+      </a>
+    </div>
+<!--
+    <div class="common-button blue-button pull-right" ng-if="user_register && userLoggedIn">
+      <a href="/properties"  class="col-md-12 col-sm-4 hidden-xs" style= "padding:0px;color:#fff;text-decoration:none">
+        {{'HEADER.OFFERING' | translate}}
+      </a>
+    </div>
+-->
+     <div class="common-button yellow-button pull-right notifications top-left" ng-if="user_register && userLoggedIn" style="position:relative;margin-right: 5px;">
+      <a href="/bestfrent_premium"  class="col-md-12 col-sm-4 hidden-xs" style= "padding:0px;color:#fff;text-decoration:none">
+       {{'HEADER.MY_BESTFRENT' | translate}}
+      </a>
+      <span class="badge bestfrent-badge pull-right">{{$root.my_notification | display_notification: ['landlord','tenant']:'properties':[]:[]}}</span>
+    </div>
+    <a href="#" ng-if="!userLoggedIn" class="trigger-signin hidden-sm hidden-xs pull-right common-button grey-button" ng-click="signInUser()">
+      LOGIN
+    </a>
+    <div class="col-sm-1 pull-right">
+         <a href="#" class="menu-item pull-right setting-icon col-md-1" style="padding:0;border:none" data-toggle="dropdown" ng-if="user_register && userLoggedIn">
+        	<i class="fa fa-gear" style="font-size: 16px;"></i>
+      </a>
+      <ul class="dropdown-menu col-md-1 col-sm-1 col-xs-1" role="menu" style="margin:0px;border-radius:0px">
+        <li>
+          <a href="#" ng-click="signOutUser()">
+            <div class="col-md-2 col-sm-2 col-xs-2" style="padding:0px">
+              <b class="fa fa-sign-out"></b>
+            </div>
+            <div class="col-md-10 col-sm-10 col-xs-10">
+              {{'HEADER.SIGNOUT' | translate}}
+            </div>
+            <div style="clear:both"></div>
+          </a>
+        </li>
+        <li>
+          <a href="/users">
+            <div class="col-md-2 col-sm-2 col-xs-2" style="padding:0px">
+              <b class="fa fa-cog"></b>
+            </div>
+            <div class="col-md-10 col-sm-10 col-xs-10">
+              {{'HEADER.MY_ACCOUNT' | translate}}
+            </div>
+            <div style="clear:both"></div>
+          </a>
+        </li>
+        <li>
+          <a href="/my_profile">
+            <div class="col-md-2 col-sm-2 col-xs-2" style="padding:0px">
+              <b class="fa fa-user"></b>
+            </div>
+            <div class="col-md-10 col-sm-10 col-xs-10">
+              {{'HEADER.MY_PROFILE' | translate}}
+            </div>
+            <div style="clear:both"></div>
+          </a>
+        </li>
+      </ul>
+    </div>
+     <!-- <a href="/sign_up" ng-if="!userLoggedIn" class=" col-md-2 trigger-signin hidden-sm hidden-xs pull-right" style="background: #ecb648;padding-top: 15px;padding-bottom: 17px;text-align: center;border-right: 1px solid #fff;color:#fff;text-decoration:none;">
+      Sign Up
+    </a> -->
+    </div>
+  </div>
+</div>
+<!-- Spinner container -->
+<div style="position:absolute;display:none" ng-include="'shared/_authentication_modal.html'" ng-if="!userLoggedIn"></div>
+<div ng-include="" src="'shared/_spinner.html'"></div>
+<!-- Notice modal popup container -->
+<div ng-include="" src="'shared/_notice_modal_popup.html'" ng-if="$root.notice_modal_popup == 'open'"></div>

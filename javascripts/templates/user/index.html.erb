@@ -1,0 +1,152 @@
+<div ng-include="" src="'shared/_header.html'" ng-controller="HeaderController"></div>
+
+
+<div class="profile_page">
+  <div class="container">
+    <div class="account row">
+      <div class="profile_header">
+        <h5> {{'MY_ACCOUNT.PERSONAL_INFO' | translate}}</h5>
+<!--           <button ng-click="changeLanguage('en')">English</button>
+          <button ng-click="changeLanguage('gr')">Germany</button>
+ -->      </div>
+      <div class="col-md-6 col-md-offset-1 col-sm-7 col-xs-12">
+        <div class="form_fields col-md-12 col-sm-12 col-xs-12 pull-left">
+          <ul style="color:#ba121f;margin:0;padding:0;">
+            <li ng-repeat="error in userErrors" style="list-style:none">
+              {{error}}
+            </li>
+          </ul>
+          <div class="row data">
+            <label class="col-md-4 col-sm-4 col-xs-4" style="margin-top: 7px;">{{'MY_ACCOUNT.USERNAME' | translate}} *</label>
+            <input class="col-md-6 col-sm-8 col-xs-8"  required="required"   ng-model="user.username" style="padding: 5px;outline:none;box-shadow:none" type="text">
+          </div>
+          <div class="row data">
+            <label class="col-md-4 col-sm-4  col-xs-4" style="margin-top: 7px;">{{'MY_ACCOUNT.EMAIL' | translate}} *</label>
+            <input class="col-md-6 col-sm-8 col-xs-8" ng-model="user.email" required="required" style="padding: 5px;outline:none;box-shadow:none" type="email" value="" readonly>
+          </div>
+          <div class="row data" ng-if="!changePassword"  ng-click="change_password()">
+             <a href="#" class="col-md-8 col-md-offset-4">{{'MY_ACCOUNT.PASSWORD.CHNG_PASSWORD' | translate}}</p>
+          </div>
+           <div class="row data"  ng-if="changePassword" ng-click="nochange_password()">
+             <a href="#" class="col-md-8 col-md-offset-4">No Password change</a>
+          </div>
+          <div class="row data" ng-if="changePassword">
+            <label class="col-md-4 col-sm-4 col-xs-4" style="margin-top: 7px;">{{'MY_ACCOUNT.PASSWORD.CURRENT_PASSWORD' | translate}}</label>
+            <input class="col-md-6 col-sm-8 col-xs-8" ng-model="user.current_password" style="padding: 5px;outline:none;box-shadow:none" type="password">
+          </div>
+          <div class="row data" ng-if="changePassword">
+            <label class="col-md-4 col-sm-4 col-xs-4" style="margin-top: 7px;">{{'MY_ACCOUNT.PASSWORD.CHNG_PASSWORD' | translate}}</label>
+            <input class="col-md-6 col-sm-8 col-xs-8" ng-model="user.password" style="padding: 5px;outline:none;box-shadow:none" type="password">
+          </div>
+           <div class="row data" ng-if="changePassword">
+            <label class="col-md-4 col-sm-4 col-xs-4" style="margin-top: 7px;">{{'MY_ACCOUNT.PASSWORD.CONFIRM_PASSWORD' | translate}}</label>
+            <input class="col-md-6 col-sm-8 col-xs-8" ng-model="user.password_confirmation" style="padding: 5px;outline:none;box-shadow:none" type="password">
+          </div>
+          <div class="row data">
+            <label class="col-md-4 col-sm-4  col-xs-4" style="margin-top: 7px;">{{'MY_ACCOUNT.SEX' | translate}} *</label>
+            <input ng-model="user.gender" required="required" type="radio" value="male">
+            {{'PROFILE_PAGE.ABOUT_ME.SEX.MALE' | translate}}
+            <input ng-model="user.gender" required="required" type="radio" value="female">
+           {{'PROFILE_PAGE.ABOUT_ME.SEX.FEMALE' | translate}}
+          </div>
+          <div class="row data" >
+            <label class="col-md-4 col-sm-4 col-xs-4" style="margin-top: 7px;">{{'MY_ACCOUNT.FIRSTNAME' | translate}}</label>
+            <input autofocus="autofocus" class="col-md-6 col-sm-8 col-xs-8" ng-model="user.first_name" style="padding: 5px;outline:none;box-shadow:none" type="text">
+          </div>
+          <div class="row data" >
+            <label class="col-md-4 col-sm-4 col-xs-4" style="margin-top: 7px;">{{'MY_ACCOUNT.LASTNAME' | translate}}</label>
+            <input class="col-md-6 col-sm-8 col-xs-8" ng-model="user.last_name" style="padding: 5px;outline:none;box-shadow:none" type="text">
+          </div>
+          <div class="row data">
+            <label class="col-md-4 col-sm-4  col-xs-4" style="margin-top: 7px;">{{'MY_ACCOUNT.STREET' | translate}}</label>
+            <input class="col-md-6 col-sm-8 col-xs-8" ng-model="user.street" style="padding: 5px;outline:none;box-shadow:none" type="text">
+          </div>
+          <div class="row data">
+            <label class="col-md-4 col-sm-4  col-xs-4" style="margin-top: 7px;">{{'MY_ACCOUNT.HOUSENO' | translate}}</label>
+            <input class="col-md-6 col-sm-8 col-xs-8" ng-model="user.no" style="padding: 5px;outline:none;box-shadow:none" type="text">
+          </div>
+          <div class="row data">
+            <label class="col-md-4 col-sm-4  col-xs-4"required="required" style="margin-top: 7px;">{{'MY_ACCOUNT.ZIPCODE' | translate}} *</label>
+            <input class="col-md-6 col-sm-8 col-xs-8" ng-model="user.zipcode" required="required" style="padding: 5px;outline:none;box-shadow:none" type="text">
+          </div>
+          <div class="row data">
+            <label class="col-md-4 col-sm-4  col-xs-4" style="margin-top: 7px;">{{'MY_ACCOUNT.CITY' | translate}}</label>
+            <input class="col-md-6 col-sm-8 col-xs-8" ng-model="user.city" style="padding: 5px;outline:none;box-shadow:none" type="text">
+          </div>
+          <div class="row data">
+            <label class="col-md-4 col-sm-4  col-xs-4" style="margin-top: 7px;">{{'MY_ACCOUNT.COUNTRY' | translate}}</label>
+            <input class="col-md-6 col-sm-8 col-xs-8" ng-model="user.country" style="padding: 5px;outline:none;box-shadow:none" type="text">
+          </div>
+          <div class="row data">
+            <label class="col-md-4 col-sm-4  col-xs-4" style="margin-top: 7px;">{{'MY_ACCOUNT.DOB' | translate}} *</label>
+            <p class="input-group">
+              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="user.dob" is-open="opened"  datepicker-options="dateOptions" date-disabled="disabled(date, mode)" max="current_date" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+          </div>
+
+          <div class="row data form-group">
+            <label class="col-md-4 col-sm-4 col-xs-4" style="margin-top: 7px;">{{'MY_ACCOUNT.SELECT_LANG' | translate}}</label>
+            <div class="col-md-6 col-sm-8 col-xs-8" style="padding: 0">
+              <select class="form-control" type="text" ng-model="user.language">
+                <option value="en" ng-selected="(user.language == 'en')">English</option>
+                <option value="gr" ng-selected="(user.language == 'gr')">Germany</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-5 col-sm-5">
+        <div class="user-image col-md-15 col-sm-16 col-xs-12 pull-left" style="padding: 50px;">
+          <div class="row">
+            <div class="thumbnail">
+              <input id="user_avatar" name="user[avatar]" type="file" ng-file-select="onFileSelect($files)">
+			  
+            </div>
+          </div>
+          <img src="{{user.avatar.url}}" style="width:100%;height:300px;padding:30px;border:2px solid orange">
+          <div class="row">
+            <input class="col-md-1 col-sm-1 col-xs-1" required="true" style="margin-top:9px;" type="checkbox">
+            <p style="margin-top: 7px;font-size:12px">Accept Toc (Correct Content)</p>
+          </div>
+          <div class="row" style="padding: 10px 0">
+           
+			<button class="col-md-4 pull-right btn btn-success" name="commit" type="button" value="update" ng-click="updateUser(user)">{{'MY_ACCOUNT.UPDATE_BTN' | translate}}</button>
+          </div>
+          <div class="row">
+            <div class="col-md-10 col-sm-10 col-xs-10">
+              <a href="#" ng-click="deleteAccount()">{{'MY_ACCOUNT.DEACTIVE_ACCNT' | translate}}</a>
+            </div>
+          </div>
+
+          <div class="bank_header">
+            <h3>{{'MY_ACCOUNT.BANK' | translate}}</h3>
+          </div>
+          <div class="row data">
+            <label class="col-md-4 col-sm-4  col-xs-4" style="margin-top: 7px;">{{'MY_ACCOUNT.IBAN' | translate}}</label>
+            <input class="col-md-6 col-sm-8 col-xs-8" style="padding: 5px;outline:none;box-shadow:none" type="text"  ng-model="user.iban">
+          </div>
+          <div class="row data">
+            <label class="col-md-4 col-sm-4  col-xs-4" style="margin-top: 7px;">{{'MY_ACCOUNT.BIC' | translate}}</label>
+            <input class="col-md-6 col-sm-8 col-xs-8" style="padding: 5px;outline:none;box-shadow:none" type="text" ng-model="user.bic">
+          </div>
+          <div class="row data">
+            <label class="col-md-4 col-sm-4  col-xs-4" style="margin-top: 7px;">{{'MY_ACCOUNT.HOLDER' | translate}}</label>
+            <input class="col-md-6 col-sm-8 col-xs-8" style="padding: 5px;outline:none;box-shadow:none" type="text" ng-model="user.holder">
+          </div>
+          <div class="row data">
+            <label class="col-md-4 col-sm-4  col-xs-4" style="margin-top: 7px;">{{'MY_ACCOUNT.BANK' | translate}}</label>
+            <input class="col-md-6 col-sm-8 col-xs-8" style="padding: 5px;outline:none;box-shadow:none" type="text" ng-model="user.bank">
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="position:absolute;display:none" ng-include="'shared/_delete_account_modal.html'" ng-if="userLoggedIn"></div>
+
+<div ng-include="" src="'user/_alert_popup.html'"></div>
